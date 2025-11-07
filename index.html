@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nardos Portfolio</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="links">
+    <div id="logo">My Portfolio</div>
+    <nav class="link">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <button id="themeToggle" aria-label="Toggle theme" class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="home" class="p1">
+      <!-- place your first photo at assets/profile1.jpg -->
+      <img src="kir.png" alt="Profile" class="im1" />
+      <h1 class="t1">Nardos Behailu</h1>
+      <div class="t3">Creative Developer &amp; UX/UI Designer</div>
+      <div class="button">
+        <button class="b" id="btn-work">View My Work</button>
+        <button class="b2" id="btn-contact">Contact Me</button>
+      </div>
+      <div class="bouncing-box">↓</div>
+    </section>
+
+    <hr/>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="p2">
+      <h2 class="section-title">My Projects</h2>
+      <h3 class="intro">Explore my projects, where I create simple and effective solutions to real-world challenges.</h3>
+<section class="demo">
+      
+        <article class="card project-card">
+          <img src="home.png" alt="Creative Studio" class="card-image"/>
+          <div class="card-body">
+            <h3>Smart meal planner</h3>
+            <p>Minimal aesthetics and seamless UX.</p>
+          <div class="tags"><span> React   </span><span>figma</span></div>
+          
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <img src="Spin Bottle.png" alt="Habit Tracker" class="card-image"/>
+          <div class="card-body">
+            <h3>spin-the-bottle</h3>
+            <p>3 types of group games included,fun and interactive</p>
+            <div class="tags"><span>Html/Css </span> <span> javascript</span></div>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <img src="Arhibu Streaming.png" alt="E-commerce" class="card-image"/>
+          <div class="card-body">
+            <h3>Movie streamer</h3>
+            <p>Cool and interactive ui with different features like trailures, current movie informatics.</p>
+            <div class="tags"><span>JavaScript</span><span>HTML/CSS</span></div>
+          </div>
+        </article>
+      </div>
+      </section>
+    </section>
+
+    <hr/>
+
+    <!-- ABOUT -->
+    <section id="about" class="p3">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-grid">
+        <!-- place your second photo at assets/profile2.jpg -->
+        <div class="about-photo">
+          <img src="assets/profile2.jpg" alt="About photo" />
+        </div>
+        <div class="about-text">
+          <h2>I am Nardos Behailu</h2><br>
+          <h3>I’m a passionate web developer and UX/UI designer focused on turning ideas into clean, functional, and beautiful experiences. I enjoy building interfaces and tools that people love to use.</h3>
+        
+  <div class="cv-container">
+   
+    <button id="downloadBtn">See My CV</button>
+  </div>
+        </div>
+      </div>
+    </section>
+
+    <hr/>
+
+    <!-- SKILLS -->
+    <section id="skills" class="p4">
+      <h2 class="section-title">Skills & Expertise</h2>
+
+      <div class="skills-wrapper">
+        <div class="skill-icons">
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><p>JavaScript</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><p>HTML5</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"><p>CSS3</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><p>React</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node"><p>Node.js</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"><p>Flutter</p></div>
+          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><p>MongoDB</p></div>
+        </div>
+
+        <div class="percentage">
+          <div class="scroll-container">
+            <div class="skill-block">
+              <div class="label">Mobile Programming</div>
+              <div class="container">
+                <div class="liquid" id="liquid1" data-target="70"></div>
+                <div class="percentage-text" id="percentage1">0%</div>
+              </div>
+            </div>
+
+            <div class="skill-block">
+              <div class="label">Web Development</div>
+              <div class="container">
+                <div class="liquid" id="liquid2" data-target="80"></div>
+                <div class="percentage-text" id="percentage2">0%</div>
+              </div>
+            </div>
+
+            <div class="skill-block">
+              <div class="label">UX / UI Design</div>
+              <div class="container">
+                <div class="liquid" id="liquid3" data-target="75"></div>
+                <div class="percentage-text" id="percentage3">0%</div>
+              </div>
+            </div>
+
+            <div class="skill-block">
+              <div class="label">Networking</div>
+              <div class="container">
+                <div class="liquid" id="liquid4" data-target="65"></div>
+                <div class="percentage-text" id="percentage4">0%</div>
+              </div>
+            </div>
+
+            <div class="skill-block">
+              <div class="label">Cybersecurity</div>
+              <div class="container">
+                <div class="liquid" id="liquid5" data-target="70"></div>
+                <div class="percentage-text" id="percentage5">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+    </section>
+
+    <hr/>
+
+    <!-- CONTACT (untouched) -->
+    <section id="contact" class="p5">
+      <div class="contact-header">
+        <h2>Get in touch</h2>
+        <p>Have a project in mind or need to collaborate? Feel free to reach out using this form.</p>
+      </div>
+
+      <div class="c-ia">
+        <div class="contact-form">
+          <h3>Fill this form</h3>
+          <form id="contactForm">
+            <input type="text" placeholder="your name" id="name" />
+            <input type="email" placeholder="youremail**.gmail" id="email" />
+            <input type="text" placeholder="subject" id="subject" />
+            <textarea placeholder="your message" id="message"></textarea>
+            <button type="button" class="send" id="sendBtn">send message</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h3> contact information</h3>
+          <div class="info1"><i class="fas fa-map-marker-alt"></i><div class="pno"><div>location</div><div>dessie city ,wollo, ethiopia</div></div></div>
+          <div class="info2"><i class="fas fa-envelope"></i><div class="pno"><div>E-mail</div><div>johnn*****@gmail.com</div></div></div>
+          <div class="info3"><i class="fas fa-phone"></i><div class="pno"><div>phone number</div><div>+25197659****</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© 2025 Nardos Portfolio. All Rights Reserved.</div>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
