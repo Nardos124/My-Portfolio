@@ -3126,3 +3126,38 @@ body.light .drawer-link::before { background: #b8860b; }
   animation: bounce 1.6s ease-in-out infinite;
   filter: drop-shadow(0 0 8px var(--accent));
 }
+
+/* ══ DRAWER LINKS WITH ICONS ══ */
+.drawer-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.drawer-link i {
+  width: 20px;
+  text-align: center;
+  color: var(--accent);
+  font-size: .9rem;
+  flex-shrink: 0;
+}
+body.light .drawer-link i { color: #b8860b; }
+
+/* ══ CFC-FIELD — ensure form inputs work ══ */
+.cfc-field input,
+.cfc-field textarea {
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/* ══ JERSEY GH BTN — ensure it's a proper link ══ */
+a.jersey-gh-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+/* ══ CTA LINKS — pointer cursor ══ */
+.cbb-item { cursor: pointer; text-decoration: none; color: inherit; }
+.cbb-item:hover { text-decoration: none; }
