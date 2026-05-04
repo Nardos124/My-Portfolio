@@ -2750,3 +2750,85 @@ body.light :focus-visible { outline-color: #b8860b; }
   .contract-title { font-size: clamp(1.5rem,9vw,2.2rem) !important; }
   .contract-form-card { padding: 16px 12px !important; }
 }
+
+/* ══ MOBILE NAV — hamburger only, hide secondary nav ══ */
+@media (max-width: 700px) {
+  /* hide secondary sticky nav on mobile */
+  .secondary-nav { display: none !important; }
+
+  /* hero-nav: show only logo + hamburger, hide links */
+  .hero-nav-links { display: none !important; }
+  .hamburger-btn  { display: flex !important; }
+
+  /* hero-nav pill shrinks to just logo + hamburger */
+  .hero-nav {
+    width: min(200px, 88vw) !important;
+    padding: 8px 14px !important;
+    left: auto !important;
+    right: 14px !important;
+    transform: none !important;
+    top: 10px !important;
+  }
+
+  /* push content down so nav doesn't overlap */
+  .hero-content { top: auto; }
+}
+
+/* ══ STATS MODAL — scrollable, all content visible ══ */
+.stats-overlay {
+  align-items: flex-start !important;
+  padding: 60px 16px 20px !important;
+  overflow-y: auto !important;
+}
+.stats-modal {
+  max-height: none !important;
+  overflow: visible !important;
+  width: min(460px, 96vw) !important;
+  margin: 0 auto !important;
+}
+/* ensure radar canvas doesn't overflow */
+#radarChart {
+  max-width: 100% !important;
+  height: auto !important;
+}
+/* stats attrs always visible */
+.stats-attrs {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+}
+.sa { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; }
+.av { display: block !important; font-size: 1.4rem !important; font-weight: 900 !important; }
+.stats-sw { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+.stats-sw ul { display: flex !important; flex-direction: column !important; gap: 5px !important; }
+.stats-sw li { display: list-item !important; font-size: .8rem !important; color: var(--text2) !important; }
+
+/* ══ CONTRACT BOTTOM BAR — compact on mobile ══ */
+@media (max-width: 700px) {
+  .contract-bottom-bar {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+  }
+  .cbb-item {
+    padding: 10px 12px !important;
+    border-right: 1px solid var(--border) !important;
+    border-bottom: 1px solid var(--border) !important;
+    min-width: 0 !important;
+  }
+  /* remove right border on even items */
+  .cbb-item:nth-child(2n) { border-right: none !important; }
+  /* remove bottom border on last row */
+  .cbb-item:nth-last-child(-n+2) { border-bottom: none !important; }
+  .cbb-item i { font-size: .9rem !important; }
+  .cbb-item strong { font-size: .72rem !important; }
+  .cbb-item span { font-size: .58rem !important; }
+}
+
+@media (max-width: 480px) {
+  .contract-bottom-bar { grid-template-columns: 1fr !important; }
+  .cbb-item { border-right: none !important; }
+  .cbb-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border) !important; }
+  .cbb-item:last-child { border-bottom: none !important; }
+}
