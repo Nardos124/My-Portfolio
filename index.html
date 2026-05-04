@@ -1,204 +1,901 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Nardos Portfolio</title>
-
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=57"/>
 </head>
 <body>
 
-  <header class="links">
-    <div id="logo">My Portfolio</div>
-    <nav class="link">
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#contact" class="nav-link">Contact</a>
-      <button id="themeToggle" aria-label="Toggle theme" class="theme-toggle"><i class="fas fa-moon"></i></button>
-    </nav>
-  </header>
-
-  <!-- HERO -->
   <main>
-    <section id="home" class="p1">
-      <!-- place your first photo at assets/profile1.jpg -->
-      <img src="kir.png" alt="Profile" class="im1" />
-      <h1 class="t1">Nardos Behailu</h1>
-      <div class="t3">Creative Developer &amp; UX/UI Designer</div>
-      <div class="button">
-        <button class="b" id="btn-work">View My Work</button>
-        <button class="b2" id="btn-contact">Contact Me</button>
+
+    <!-- ══ HERO + ABOUT share a sticky scroll container ══ -->
+    <div class="scroll-stage">
       </div>
-      <div class="bouncing-box">↓</div>
-    </section>
-
-    <hr/>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="p2">
-      <h2 class="section-title">My Projects</h2>
-      <h3 class="intro">Explore my projects, where I create simple and effective solutions to real-world challenges.</h3>
-<section class="demo">
-      
-        <article class="card project-card">
-          <img src="home.png" alt="Creative Studio" class="card-image"/>
-          <div class="card-body">
-            <h3>Smart meal planner</h3>
-            <p>Minimal aesthetics and seamless UX.</p>
-          <div class="tags"><span> React   </span><span>figma</span></div>
-          
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <img src="Spin Bottle.png" alt="Habit Tracker" class="card-image"/>
-          <div class="card-body">
-            <h3>spin-the-bottle</h3>
-            <p>3 types of group games included,fun and interactive</p>
-            <div class="tags"><span>Html/Css </span> <span> javascript</span></div>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <img src="Arhibu Streaming.png" alt="E-commerce" class="card-image"/>
-          <div class="card-body">
-            <h3>Movie streamer</h3>
-            <p>Cool and interactive ui with different features like trailures, current movie informatics.</p>
-            <div class="tags"><span>JavaScript</span><span>HTML/CSS</span></div>
-          </div>
-        </article>
       </div>
+
+      <!-- HERO -->
+      <section id="home" class="hero-section">
+
+        <!-- full-bleed photo -->
+        <div class="hero-bg">
+          <img src="image.png" alt="Nardos Behailu" class="hero-bg-img"/>
+          <div class="hero-bg-overlay"></div>
+        </div>
+
+        <!-- sticky nav bar — always visible -->
+        <nav class="hero-nav" id="heroNav">
+          <div class="hero-nav-logo">N<span>.</span></div>
+
+          <!-- desktop links -->
+          <div class="hero-nav-links" id="heroNavLinks">
+            <a href="#home"     class="hero-nav-link active">Home</a>
+            <a href="#about"    class="hero-nav-link">About</a>
+            <a href="#skills"   class="hero-nav-link">Skills</a>
+            <a href="#projects" class="hero-nav-link">Projects</a>
+            <a href="#contact"  class="hero-nav-link">Contact</a>
+          </div>
+
+          <div class="hero-nav-right">
+            <!-- hamburger for mobile -->
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </nav>
+        <!-- FIXED theme toggle — outside hero stacking context -->
+        <button id="themeToggle" class="theme-toggle-global" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+
+        <!-- mobile drawer -->
+        <div class="mobile-nav-drawer" id="mobileDrawer">
+          <a href="#home"     class="drawer-link">Home</a>
+          <a href="#about"    class="drawer-link">About</a>
+          <a href="#skills"   class="drawer-link">Skills</a>
+          <a href="#projects" class="drawer-link">Projects</a>
+          <a href="#contact"  class="drawer-link">Contact</a>
+        </div>
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+        <!-- hero content -->
+        <div class="hero-content">
+          <p class="hero-title">NARDOS BEHAILU </p>
+          <h1 class="hero-name">FULL STACK<br/>DEVELOPER</h1>
+          <div class="hero-btns">
+            <button class="btn-primary" id="btn-work">View My Work</button>
+            <button class="btn-outline" id="btn-contact">Contact Me</button>
+          </div>
+        </div>
+
+        <!-- social icons -->
+        <div class="hero-socials">
+           <br/>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+        </div>
+
+        <!-- scroll hint -->
+        <div class="hero-scroll-hint">↓ scroll</div>
+
+        <!-- invisible anchor for JS card travel -->
+        <div class="hero-spacer" id="heroSpacerEl"></div>
+
       </section>
-    </section>
 
-    <hr/>
+    <!-- SECONDARY STICKY NAV — visible on all pages below hero -->
+    <nav class="secondary-nav" id="secondary-nav">
+      <div class="snav-inner">
+        <a href="#home"     class="snav-link" data-section="home"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="#about"    class="snav-link" data-section="about"><i class="fas fa-user"></i><span>About</span></a>
+        <a href="#projects" class="snav-link" data-section="projects"><i class="fas fa-folder-open"></i><span>Projects</span></a>
+        <a href="#skills"   class="snav-link" data-section="skills"><i class="fas fa-futbol"></i><span>Skills</span></a>
+        <a href="#contact"  class="snav-link" data-section="contact"><i class="fas fa-envelope"></i><span>Contact</span></a>
+      </div>
+    </nav>
 
-    <!-- ABOUT -->
-    <section id="about" class="p3">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-grid">
-        <!-- place your second photo at assets/profile2.jpg -->
-        <div class="about-photo">
-          <img src="assets/profile2.jpg" alt="About photo" />
+      <!-- ABOUT -->
+      <section id="about" class="about-section">
+        <div class="about-layout">
+
+          <!-- LEFT: FIFA card — image only, click to show stats -->
+          <div class="about-card-col">
+            <div class="about-card-wrap" id="aboutCardWrap">
+              <img src="kira22.png" alt="Nardos" class="about-card-img" id="playerCardImg"/>
+              <div class="card-click-hint"><i class="fas fa-hand-pointer"></i> Click for stats</div>
+            </div>
+          </div>
+
+          <!-- STATS MODAL — fixed overlay, never covered -->
+          <div class="stats-overlay" id="statsOverlay" hidden>
+            <div class="stats-modal" id="statsModal">
+              <button class="stats-close" id="statsClose" aria-label="Close"><i class="fas fa-times"></i></button>
+              <div class="stats-top">
+                <div class="stats-avatar"><img src="kir.png" alt="Nardos"/></div>
+                <div>
+                  <div class="stats-name">NARDOS BEHAILU</div>
+                  <div class="stats-pos">CM · FULL STACK DEV · 89 OVR</div>
+                </div>
+              </div>
+              <canvas id="radarChart" width="300" height="260"></canvas>
+              <div class="stats-attrs">
+                <div class="sa"><span class="av high" data-val="90">0</span><span>PACE</span></div>
+                <div class="sa"><span class="av high" data-val="92">0</span><span>VISION</span></div>
+                <div class="sa"><span class="av high" data-val="88">0</span><span>PASSING</span></div>
+                <div class="sa"><span class="av mid"  data-val="75">0</span><span>DEFENSE</span></div>
+                <div class="sa"><span class="av mid"  data-val="85">0</span><span>STAMINA</span></div>
+                <div class="sa"><span class="av high" data-val="95">0</span><span>TECHNIQUE</span></div>
+              </div>
+              <div class="stats-sw">
+                <div class="stats-strengths">
+                  <h5><i class="fas fa-arrow-up"></i> STRENGTHS</h5>
+                  <ul><li>Problem Solving</li><li>Clean Code</li><li>Fast Learning</li><li>Team Collaboration</li></ul>
+                </div>
+                <div class="stats-weaknesses">
+                  <h5><i class="fas fa-arrow-down"></i> WEAKNESSES</h5>
+                  <ul><li>Perfectionism</li><li>Overthinking</li><li>Public Speaking</li></ul>
+                </div>
+              </div>
+            </div><!-- end stats-modal -->
+          </div><!-- end stats-overlay -->
+
+          <!-- RIGHT: info -->
+          <div class="about-info-col">
+            <p class="about-label">ABOUT ME</p>
+            <h2 class="about-heading">FULL STACK<br/>DEVELOPER</h2>
+
+            <blockquote class="about-quote">
+              Hi, I'm Nardos Behailu, a passionate full stack developer with a strong
+              focus on building scalable, efficient, and user-friendly web applications.
+              I enjoy turning ideas into real-world solutions using modern technologies.
+            </blockquote>
+
+            <div class="about-meta-grid">
+              <div class="about-meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div><span class="meta-label">Experience</span><span class="meta-value">2+ Years</span></div>
+              </div>
+              <div class="about-meta-item">
+                <i class="fas fa-graduation-cap"></i>
+                <div><span class="meta-label">Education</span><span class="meta-value">BSc Information Systems</span></div>
+              </div>
+              <div class="about-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div><span class="meta-label">Location</span><span class="meta-value">Bahirdar, Ethiopia</span></div>
+              </div>
+              <div class="about-meta-item">
+                <i class="fas fa-envelope"></i>
+                <div><span class="meta-label">Email</span><span class="meta-value">nardosbehailu23@gmail.com</span></div>
+              </div>
+            </div>
+
+            <div class="about-actions">
+              <button id="downloadBtn" class="btn-about-cv">
+                <i class="fas fa-download"></i> DOWNLOAD RESUME
+              </button>
+              <button class="btn-about-projects" id="btn-work2">
+                VIEW PROJECTS <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
         </div>
-        <div class="about-text">
-          <h2>I am Nardos Behailu</h2><br>
-          <h3>I’m a passionate web developer and UX/UI designer focused on turning ideas into clean, functional, and beautiful experiences. I enjoy building interfaces and tools that people love to use.</h3>
-        
-  <div class="cv-container">
-   
-    <button id="downloadBtn">See My CV</button>
-  </div>
+      </section>
+
+
+
+            <!-- ══ PROJECTS ══ -->
+    <section id="projects" class="projects-section">
+
+      <!-- header -->
+      <div class="projects-top">
+        <div>
+          <p class="projects-label">| MY WORK</p>
+          <h2 class="projects-heading">PROJECTS</h2>
+          <p class="projects-sub">Welcome to my dressing room. Each project represents a challenge, a solution, and a step forward in my journey.</p>
+        </div>
+        <div class="proj-plan-box">
+          <span>PLAN <i class="fas fa-arrow-right"></i> BUILD</span>
+          <span style="opacity:.5;font-size:.7rem;text-align:center"><i class="fas fa-arrow-down"></i></span>
+          <span>TEST <i class="fas fa-arrow-right"></i> DEPLOY <i class="fas fa-trophy"></i></span>
         </div>
       </div>
-    </section>
 
-    <hr/>
-
-    <!-- SKILLS -->
-    <section id="skills" class="p4">
-      <h2 class="section-title">Skills & Expertise</h2>
-
-      <div class="skills-wrapper">
-        <div class="skill-icons">
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><p>JavaScript</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><p>HTML5</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"><p>CSS3</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><p>React</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node"><p>Node.js</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"><p>Flutter</p></div>
-          <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><p>MongoDB</p></div>
+      <!-- locker room carousel -->
+      <div class="locker-room">
+        <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <div class="jersey-carousel" id="jerseyCarousel">
+        <div class="jersey-card" data-index="0" data-cat="web top3">
+          <div class="jersey-card-inner">
+            <div class="jersey-num-badge">01</div>
+            <div class="jersey-hanger">
+              <div class="jersey-shirt" style="--jersey-accent:#c8a000">
+                <div class="jersey-text">E-COMMERCE</div>
+                <div class="jersey-number">10</div>
+                <div class="jersey-brand">NB</div>
+              </div>
+            </div>
+            <div class="jersey-info">
+              <h3>E-Commerce Platform</h3>
+              <p>Full stack e-commerce platform with secure payments, cart, and admin panel.</p>
+              <div class="tags"><span>Next.js</span><span>Node.js</span><span>MongoDB</span><span>Tailwind</span></div>
+              <div class="jersey-btns">
+                <button class="jersey-view-btn" data-project="0">VIEW PROJECT <i class="fas fa-arrow-right"></i></button>
+                <a href="#" class="jersey-gh-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="proj-detail-data" hidden
+            data-name="E-Commerce Platform"
+            data-desc="Full stack e-commerce platform with secure payments, cart, and admin panel."
+            data-tags="Next.js,Node.js,MongoDB,Tailwind"
+            data-features="Secure Stripe payments|Admin dashboard|Product search & filter"
+            data-demo="#"
+            data-source="#"
+            data-img="home.png">
+          </div>
         </div>
-
-        <div class="percentage">
-          <div class="scroll-container">
-            <div class="skill-block">
-              <div class="label">Mobile Programming</div>
-              <div class="container">
-                <div class="liquid" id="liquid1" data-target="70"></div>
-                <div class="percentage-text" id="percentage1">0%</div>
+        <div class="jersey-card" data-index="1" data-cat="web">
+          <div class="jersey-card-inner">
+            <div class="jersey-num-badge">02</div>
+            <div class="jersey-hanger">
+              <div class="jersey-shirt" style="--jersey-accent:#ffffff">
+                <div class="jersey-text">TASK MANAGER</div>
+                <div class="jersey-number">08</div>
+                <div class="jersey-brand">NB</div>
               </div>
             </div>
-
-            <div class="skill-block">
-              <div class="label">Web Development</div>
-              <div class="container">
-                <div class="liquid" id="liquid2" data-target="80"></div>
-                <div class="percentage-text" id="percentage2">0%</div>
+            <div class="jersey-info">
+              <h3>Task Management App</h3>
+              <p>Productivity app to manage tasks, set priorities and track progress in real-time.</p>
+              <div class="tags"><span>React</span><span>Express.js</span><span>MongoDB</span><span>Socket.io</span></div>
+              <div class="jersey-btns">
+                <button class="jersey-view-btn" data-project="1">VIEW PROJECT <i class="fas fa-arrow-right"></i></button>
+                <a href="#" class="jersey-gh-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
               </div>
             </div>
-
-            <div class="skill-block">
-              <div class="label">UX / UI Design</div>
-              <div class="container">
-                <div class="liquid" id="liquid3" data-target="75"></div>
-                <div class="percentage-text" id="percentage3">0%</div>
+          </div>
+          <div class="proj-detail-data" hidden
+            data-name="Task Management App"
+            data-desc="Productivity app to manage tasks, set priorities and track progress in real-time."
+            data-tags="React,Express.js,MongoDB,Socket.io"
+            data-features="Drag & drop board|Real-time updates|Priority levels"
+            data-demo="#"
+            data-source="#"
+            data-img="">
+          </div>
+        </div>
+        <div class="jersey-card" data-index="2" data-cat="web design top3">
+          <div class="jersey-card-inner">
+            <div class="jersey-num-badge">03</div>
+            <div class="jersey-hanger">
+              <div class="jersey-shirt" style="--jersey-accent:#c8a000">
+                <div class="jersey-text">PORTFOLIO</div>
+                <div class="jersey-number">07</div>
+                <div class="jersey-brand">NB</div>
               </div>
             </div>
-
-            <div class="skill-block">
-              <div class="label">Networking</div>
-              <div class="container">
-                <div class="liquid" id="liquid4" data-target="65"></div>
-                <div class="percentage-text" id="percentage4">0%</div>
+            <div class="jersey-info">
+              <h3>Portfolio Website</h3>
+              <p>My personal portfolio website to showcase my skills and projects.</p>
+              <div class="tags"><span>Next.js</span><span>Tailwind CSS</span><span>Framer Motion</span></div>
+              <div class="jersey-btns">
+                <button class="jersey-view-btn" data-project="2">VIEW PROJECT <i class="fas fa-arrow-right"></i></button>
+                <a href="#" class="jersey-gh-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
               </div>
             </div>
-
-            <div class="skill-block">
-              <div class="label">Cybersecurity</div>
-              <div class="container">
-                <div class="liquid" id="liquid5" data-target="70"></div>
-                <div class="percentage-text" id="percentage5">0%</div>
+          </div>
+          <div class="proj-detail-data" hidden
+            data-name="Portfolio Website"
+            data-desc="My personal portfolio website to showcase my skills and projects."
+            data-tags="Next.js,Tailwind CSS,Framer Motion"
+            data-features="Responsive Design|Smooth Animations|Dark / Light Mode"
+            data-demo="#"
+            data-source="#"
+            data-img="image.png">
+          </div>
+        </div>
+        <div class="jersey-card" data-index="3" data-cat="web">
+          <div class="jersey-card-inner">
+            <div class="jersey-num-badge">04</div>
+            <div class="jersey-hanger">
+              <div class="jersey-shirt" style="--jersey-accent:#ffffff">
+                <div class="jersey-text">CHAT APP</div>
+                <div class="jersey-number">11</div>
+                <div class="jersey-brand">NB</div>
               </div>
+            </div>
+            <div class="jersey-info">
+              <h3>Real-time Chat App</h3>
+              <p>Real-time chat application with private rooms and authentication.</p>
+              <div class="tags"><span>Socket.io</span><span>Node.js</span><span>MongoDB</span><span>React</span></div>
+              <div class="jersey-btns">
+                <button class="jersey-view-btn" data-project="3">VIEW PROJECT <i class="fas fa-arrow-right"></i></button>
+                <a href="#" class="jersey-gh-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="proj-detail-data" hidden
+            data-name="Real-time Chat App"
+            data-desc="Real-time chat application with private rooms and authentication."
+            data-tags="Socket.io,Node.js,MongoDB,React"
+            data-features="Private rooms|Real-time messaging|User authentication"
+            data-demo="#"
+            data-source="#"
+            data-img="">
+          </div>
+        </div>
+        <div class="jersey-card" data-index="4" data-cat="web">
+          <div class="jersey-card-inner">
+            <div class="jersey-num-badge">05</div>
+            <div class="jersey-hanger">
+              <div class="jersey-shirt" style="--jersey-accent:#ffffff">
+                <div class="jersey-text">BLOG PLATFORM</div>
+                <div class="jersey-number">09</div>
+                <div class="jersey-brand">NB</div>
+              </div>
+            </div>
+            <div class="jersey-info">
+              <h3>Blog Platform</h3>
+              <p>A modern blog platform with markdown support, categories and SEO optimization.</p>
+              <div class="tags"><span>Next.js</span><span>MongoDB</span><span>Tailwind CSS</span></div>
+              <div class="jersey-btns">
+                <button class="jersey-view-btn" data-project="4">VIEW PROJECT <i class="fas fa-arrow-right"></i></button>
+                <a href="#" class="jersey-gh-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="proj-detail-data" hidden
+            data-name="Blog Platform"
+            data-desc="A modern blog platform with markdown support, categories and SEO optimization."
+            data-tags="Next.js,MongoDB,Tailwind CSS"
+            data-features="Markdown editor|Categories & tags|SEO optimized"
+            data-demo="#"
+            data-source="#"
+            data-img="">
+          </div>
+        </div>
+        </div>
+        <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <!-- featured project detail panel -->
+      <div class="proj-detail-panel" id="projDetailPanel" hidden>
+        <div class="proj-detail-preview">
+          <img src="" alt="" id="detailImg" class="detail-img" style="display:none"/>
+          <div class="detail-img-placeholder" id="detailPlaceholder"><i class="fas fa-laptop-code"></i></div>
+        </div>
+        <div class="proj-detail-info">
+          <h3 id="detailName"></h3>
+          <p id="detailDesc"></p>
+          <ul class="detail-features" id="detailFeatures"></ul>
+        </div>
+        <div class="proj-detail-right">
+          <div>
+            <p class="detail-section-label">TECH STACK</p>
+            <div class="tags" id="detailTags"></div>
+          </div>
+          <div class="detail-links">
+            <div>
+              <p class="detail-section-label">LIVE DEMO</p>
+              <a href="#" id="detailDemo" class="detail-link-btn">Visit Website <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div>
+              <p class="detail-section-label">SOURCE CODE</p>
+              <a href="#" id="detailSource" class="detail-link-btn">View on GitHub <i class="fab fa-github"></i></a>
             </div>
           </div>
         </div>
       </div>
 
+    </section>
+
+    <!-- ══ SKILLS ══ -->
+    <section id="skills" class="skills-section">
+
+      <!-- Skills Landing (shown first) -->
+      <div class="skills-landing" id="skillsLanding">
+        <div class="skills-stadium-lights"></div>
+        <div class="skills-landing-grid">
+          <div class="skills-landing-left">
+            <p class="skills-label">| TECHNICAL ARSENAL</p>
+            <h2 class="skills-heading">SKILLS</h2>
+            <p class="skills-sub">My technical arsenal on the training ground. Step into the arena and explore every tool in my kit.</p>
+            <button class="btn-enter-arena" id="btnEnterArena">
+              <i class="fas fa-futbol"></i> Enter Skills Arena
+            </button>
+          </div>
+          <div class="soft-skills-panel">
+            <h4 class="soft-skills-title"><i class="fas fa-star"></i> SOFT SKILLS</h4>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Communication</span><div class="ss-bar"><div class="ss-fill" style="width:88%"></div></div></div><span class="ss-val">88</span></div>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Problem Solving</span><div class="ss-bar"><div class="ss-fill" style="width:95%"></div></div></div><span class="ss-val">95</span></div>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Leadership</span><div class="ss-bar"><div class="ss-fill" style="width:80%"></div></div></div><span class="ss-val">80</span></div>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Adaptability</span><div class="ss-bar"><div class="ss-fill" style="width:92%"></div></div></div><span class="ss-val">92</span></div>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Teamwork</span><div class="ss-bar"><div class="ss-fill" style="width:90%"></div></div></div><span class="ss-val">90</span></div>
+            <div class="soft-skill-item"><div class="ss-bar-wrap"><span>Time Management</span><div class="ss-bar"><div class="ss-fill" style="width:85%"></div></div></div><span class="ss-val">85</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Arena (hidden until button clicked) -->
+      <div class="skills-arena-hidden" id="skillsArenaWrap">
+      <!-- Skills Arena -->
+      <div class="skills-arena-wrap">
+        <div class="arena-header">
+          <span class="arena-badge">SKILLS ARENA</span>
+          <div class="arena-filters">
+            <button class="arena-filter active" data-filter="all">All</button>
+            <button class="arena-filter" data-filter="LANGUAGES">Languages</button>
+            <button class="arena-filter" data-filter="FRAMEWORKS">Frameworks</button>
+            <button class="arena-filter" data-filter="DATABASES">Databases</button>
+            <button class="arena-filter" data-filter="TOOLS">Tools</button>
+          </div>
+        </div>
+        <div class="skills-arena" id="skillsArena">
+          
+          <div class="arena-group">
+            <h4 class="arena-group-title">LANGUAGES</h4>
+            <div class="arena-balls">
+            <div class="skill-ball" data-name="JavaScript" data-rating="90" data-xp="3 yrs" data-proj="12" data-cat="LANGUAGES" style="--ball-color:#f7df1e">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-js ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">90</div>
+                <div class="tooltip-name">JavaScript</div>
+                <div class="tooltip-row"><span>XP</span><span>3 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>12</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:90%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="TypeScript" data-rating="82" data-xp="1.5 yrs" data-proj="6" data-cat="LANGUAGES" style="--ball-color:#3178c6">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-js-square ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">82</div>
+                <div class="tooltip-name">TypeScript</div>
+                <div class="tooltip-row"><span>XP</span><span>1.5 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>6</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:82%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Python" data-rating="78" data-xp="2 yrs" data-proj="5" data-cat="LANGUAGES" style="--ball-color:#3776ab">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-python ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">78</div>
+                <div class="tooltip-name">Python</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>5</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:78%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Java" data-rating="72" data-xp="1 yr" data-proj="3" data-cat="LANGUAGES" style="--ball-color:#ed8b00">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-java ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">72</div>
+                <div class="tooltip-name">Java</div>
+                <div class="tooltip-row"><span>XP</span><span>1 yr</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>3</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:72%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="C++" data-rating="65" data-xp="1 yr" data-proj="2" data-cat="LANGUAGES" style="--ball-color:#00599c">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-code ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">65</div>
+                <div class="tooltip-name">C++</div>
+                <div class="tooltip-row"><span>XP</span><span>1 yr</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>2</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:65%"></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="arena-group">
+            <h4 class="arena-group-title">FRAMEWORKS</h4>
+            <div class="arena-balls">
+            <div class="skill-ball" data-name="React" data-rating="92" data-xp="2.5 yrs" data-proj="10" data-cat="FRAMEWORKS" style="--ball-color:#61dafb">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-react ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">92</div>
+                <div class="tooltip-name">React</div>
+                <div class="tooltip-row"><span>XP</span><span>2.5 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>10</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:92%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Next.js" data-rating="85" data-xp="1.5 yrs" data-proj="6" data-cat="FRAMEWORKS" style="--ball-color:#ffffff">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-n ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">85</div>
+                <div class="tooltip-name">Next.js</div>
+                <div class="tooltip-row"><span>XP</span><span>1.5 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>6</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:85%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Node.js" data-rating="88" data-xp="2 yrs" data-proj="9" data-cat="FRAMEWORKS" style="--ball-color:#339933">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-node-js ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">88</div>
+                <div class="tooltip-name">Node.js</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>9</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:88%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Express" data-rating="86" data-xp="2 yrs" data-proj="8" data-cat="FRAMEWORKS" style="--ball-color:#ffffff">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-server ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">86</div>
+                <div class="tooltip-name">Express</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>8</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:86%"></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="arena-group">
+            <h4 class="arena-group-title">DATABASES</h4>
+            <div class="arena-balls">
+            <div class="skill-ball" data-name="MongoDB" data-rating="84" data-xp="2 yrs" data-proj="8" data-cat="DATABASES" style="--ball-color:#47a248">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-leaf ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">84</div>
+                <div class="tooltip-name">MongoDB</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>8</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:84%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="MySQL" data-rating="78" data-xp="1.5 yrs" data-proj="5" data-cat="DATABASES" style="--ball-color:#4479a1">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-database ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">78</div>
+                <div class="tooltip-name">MySQL</div>
+                <div class="tooltip-row"><span>XP</span><span>1.5 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>5</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:78%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="PostgreSQL" data-rating="75" data-xp="1 yr" data-proj="4" data-cat="DATABASES" style="--ball-color:#336791">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-database ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">75</div>
+                <div class="tooltip-name">PostgreSQL</div>
+                <div class="tooltip-row"><span>XP</span><span>1 yr</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>4</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:75%"></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="arena-group">
+            <h4 class="arena-group-title">TOOLS</h4>
+            <div class="arena-balls">
+            <div class="skill-ball" data-name="Git" data-rating="90" data-xp="3 yrs" data-proj="15" data-cat="TOOLS" style="--ball-color:#f05032">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-git-alt ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">90</div>
+                <div class="tooltip-name">Git</div>
+                <div class="tooltip-row"><span>XP</span><span>3 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>15</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:90%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="GitHub" data-rating="90" data-xp="3 yrs" data-proj="15" data-cat="TOOLS" style="--ball-color:#ffffff">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-github ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">90</div>
+                <div class="tooltip-name">GitHub</div>
+                <div class="tooltip-row"><span>XP</span><span>3 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>15</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:90%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Docker" data-rating="72" data-xp="1 yr" data-proj="3" data-cat="TOOLS" style="--ball-color:#2496ed">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-docker ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">72</div>
+                <div class="tooltip-name">Docker</div>
+                <div class="tooltip-row"><span>XP</span><span>1 yr</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>3</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:72%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Figma" data-rating="80" data-xp="2 yrs" data-proj="8" data-cat="TOOLS" style="--ball-color:#f24e1e">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fab fa-figma ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">80</div>
+                <div class="tooltip-name">Figma</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>8</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:80%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="VS Code" data-rating="95" data-xp="3 yrs" data-proj="15" data-cat="TOOLS" style="--ball-color:#007acc">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-code ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">95</div>
+                <div class="tooltip-name">VS Code</div>
+                <div class="tooltip-row"><span>XP</span><span>3 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>15</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:95%"></div></div>
+              </div>
+            </div>
+            <div class="skill-ball" data-name="Postman" data-rating="82" data-xp="2 yrs" data-proj="9" data-cat="TOOLS" style="--ball-color:#ff6c37">
+              <div class="ball-inner">
+                <div class="ball-seam"></div>
+                <i class="fas fa-paper-plane ball-icon"></i>
+              </div>
+              <div class="ball-tooltip">
+                <div class="tooltip-rating">82</div>
+                <div class="tooltip-name">Postman</div>
+                <div class="tooltip-row"><span>XP</span><span>2 yrs</span></div>
+                <div class="tooltip-row"><span>Projects</span><span>9</span></div>
+                <div class="tooltip-bar"><div class="tooltip-fill" style="width:82%"></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- end skills-arena-hidden -->
+
+      <!-- Tactical Formation + Bench -->
+      <div class="formation-wrap">
+        <div class="formation-header">
+          <span class="arena-badge">TACTICAL FORMATION</span>
+          <span class="formation-scheme">4-3-3</span>
+        </div>
+        <div class="formation-and-bench">
+
+          <!-- FIELD — left side -->
+          <div class="formation-pitch" id="formationPitch">
+            <div class="pitch-center-circle"></div>
+            <div class="pitch-center-line"></div>
+            <div class="pitch-penalty-top"></div>
+            <div class="pitch-penalty-bot"></div>
+            <div class="formation-node" style="left:25%;top:15%;--ball-color:#61dafb;--role-color:#c8a000" data-name="React" data-rating="92" data-role="ATT"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-react ball-icon"></i></div><div class="fn-label">React</div><div class="fn-rating">92</div></div>
+            <div class="formation-node" style="left:50%;top:10%;--ball-color:#ffffff;--role-color:#c8a000" data-name="Next.js" data-rating="85" data-role="ATT"><div class="fn-ball"><div class="ball-seam"></div><i class="fas fa-n ball-icon"></i></div><div class="fn-label">Next.js</div><div class="fn-rating">85</div></div>
+            <div class="formation-node" style="left:75%;top:15%;--ball-color:#f7df1e;--role-color:#c8a000" data-name="JavaScript" data-rating="90" data-role="ATT"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-js ball-icon"></i></div><div class="fn-label">JavaScript</div><div class="fn-rating">90</div></div>
+            <div class="formation-node" style="left:20%;top:40%;--ball-color:#339933;--role-color:#c8f000" data-name="Node.js" data-rating="88" data-role="MID"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-node-js ball-icon"></i></div><div class="fn-label">Node.js</div><div class="fn-rating">88</div></div>
+            <div class="formation-node" style="left:40%;top:38%;--ball-color:#ffffff;--role-color:#c8f000" data-name="Express" data-rating="86" data-role="MID"><div class="fn-ball"><div class="ball-seam"></div><i class="fas fa-server ball-icon"></i></div><div class="fn-label">Express</div><div class="fn-rating">86</div></div>
+            <div class="formation-node" style="left:60%;top:38%;--ball-color:#3178c6;--role-color:#c8f000" data-name="TypeScript" data-rating="82" data-role="MID"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-js-square ball-icon"></i></div><div class="fn-label">TypeScript</div><div class="fn-rating">82</div></div>
+            <div class="formation-node" style="left:80%;top:40%;--ball-color:#3776ab;--role-color:#c8f000" data-name="Python" data-rating="78" data-role="MID"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-python ball-icon"></i></div><div class="fn-label">Python</div><div class="fn-rating">78</div></div>
+            <div class="formation-node" style="left:25%;top:65%;--ball-color:#47a248;--role-color:#4a9eff" data-name="MongoDB" data-rating="84" data-role="DEF"><div class="fn-ball"><div class="ball-seam"></div><i class="fas fa-leaf ball-icon"></i></div><div class="fn-label">MongoDB</div><div class="fn-rating">84</div></div>
+            <div class="formation-node" style="left:50%;top:68%;--ball-color:#4479a1;--role-color:#4a9eff" data-name="MySQL" data-rating="78" data-role="DEF"><div class="fn-ball"><div class="ball-seam"></div><i class="fas fa-database ball-icon"></i></div><div class="fn-label">MySQL</div><div class="fn-rating">78</div></div>
+            <div class="formation-node" style="left:75%;top:65%;--ball-color:#336791;--role-color:#4a9eff" data-name="PostgreSQL" data-rating="75" data-role="DEF"><div class="fn-ball"><div class="ball-seam"></div><i class="fas fa-database ball-icon"></i></div><div class="fn-label">PostgreSQL</div><div class="fn-rating">75</div></div>
+            <div class="formation-node" style="left:50%;top:88%;--ball-color:#f05032;--role-color:#ff6b35" data-name="Git" data-rating="90" data-role="GK"><div class="fn-ball"><div class="ball-seam"></div><i class="fab fa-git-alt ball-icon"></i></div><div class="fn-label">Git</div><div class="fn-rating">90</div></div>
+            <div class="pitch-role-label" style="top:8%;left:2%">ATT</div>
+            <div class="pitch-role-label" style="top:36%;left:2%">MID</div>
+            <div class="pitch-role-label" style="top:63%;left:2%">DEF</div>
+            <div class="pitch-role-label" style="top:86%;left:2%">GK</div>
+          </div>
+
+          <!-- BENCH — right side -->
+          <div class="bench-sidebar">
+            <div class="bench-sidebar-title">BENCH</div>
+            <div class="bench-player" style="--ball-color:#fff"><div class="bench-ball"><i class="fas fa-cloud"></i></div><span>Vercel</span></div>
+            <div class="bench-player" style="--ball-color:#00c7b7"><div class="bench-ball"><i class="fas fa-cloud-upload-alt"></i></div><span>Netlify</span></div>
+            <div class="bench-player" style="--ball-color:#ff9900"><div class="bench-ball"><i class="fab fa-aws"></i></div><span>AWS</span></div>
+            <div class="bench-player" style="--ball-color:#764abc"><div class="bench-ball"><i class="fas fa-atom"></i></div><span>Redux</span></div>
+            <div class="bench-player" style="--ball-color:#e10098"><div class="bench-ball"><i class="fas fa-project-diagram"></i></div><span>GraphQL</span></div>
+            <div class="bench-player" style="--ball-color:#fff"><div class="bench-ball"><i class="fas fa-plug"></i></div><span>Socket.io</span></div>
+          </div>
+
+        </div><!-- end formation-and-bench -->
+      </div><!-- end formation-wrap -->
+
+    </section>
+
+    <!-- ══ CONTACT ══ -->
+    <section id="contact" class="contact-section">
+
+      <div class="contract-page">
+
+        <!-- LEFT: info + image -->
+        <div class="contract-left">
+          <p class="contract-tag">// NEW CHAPTER</p>
+          <h2 class="contract-title">SIGN THE<br/><span>CONTRACT</span></h2>
+          <p class="contract-tagline">A new chapter in code.</p>
+          <div class="contract-divider"></div>
+          <p class="contract-intro">I'm open to new opportunities, exciting projects and impactful collaborations.<br/>Let's build something legendary together.</p>
+
+          <!-- More Info toggle button -->
+          <button class="more-info-btn" id="moreInfoBtn" aria-expanded="false">
+            <i class="fas fa-chevron-right" id="moreInfoArrow"></i>
+            <span>More Information</span>
+          </button>
+
+          <!-- Hidden content — slides in from left -->
+          <div class="contract-expandable" id="contractExpandable">
+            <ul class="contract-offers">
+              <li class="co-item">
+                <div class="co-icon"><i class="fas fa-briefcase"></i></div>
+                <div><strong>Full-time Roles</strong><span>Open to exciting full-time opportunities</span></div>
+              </li>
+              <li class="co-item">
+                <div class="co-icon"><i class="fas fa-laptop-code"></i></div>
+                <div><strong>Freelance Projects</strong><span>Available for freelance &amp; contract work</span></div>
+              </li>
+              <li class="co-item">
+                <div class="co-icon"><i class="fas fa-handshake"></i></div>
+                <div><strong>Collaborations</strong><span>Love working on meaningful ideas</span></div>
+              </li>
+              <li class="co-item">
+                <div class="co-icon"><i class="fas fa-globe"></i></div>
+                <div><strong>Remote Friendly</strong><span>Open to remote opportunities worldwide</span></div>
+              </li>
+            </ul>
+
+            <div class="contract-stats">
+              <div><span class="cs-label">POSITION</span><span class="cs-val">Full Stack Developer</span></div>
+              <div><span class="cs-label">EXPERIENCE</span><span class="cs-val">2+ Years</span></div>
+              <div><span class="cs-label">STATUS</span><span class="cs-val cs-available"><i class="fas fa-circle"></i> Available</span></div>
+            </div>
+
+            <div class="contract-notes">
+              <div class="cn-item"><div class="cn-icon"><i class="fas fa-file-contract"></i></div><div><strong>Contract Terms</strong><span>Clear milestones, regular updates, full source code delivery.</span></div></div>
+              <div class="cn-item"><div class="cn-icon"><i class="fas fa-bolt"></i></div><div><strong>Response Time</strong><span>I typically respond within 24 hours.</span></div></div>
+              <div class="cn-item"><div class="cn-icon"><i class="fas fa-lock"></i></div><div><strong>NDA Available</strong><span>Happy to sign NDAs for sensitive projects.</span></div></div>
+              <div class="cn-item"><div class="cn-icon"><i class="fas fa-credit-card"></i></div><div><strong>Payment</strong><span>Flexible — milestone-based or hourly.</span></div></div>
+            </div>
+          </div>
+
+          <div class="contract-signature-box">
+            <div><span class="cs-label">SIGNATURE</span><div class="sig-text">Nardos Behailu</div></div>
+            <div><span class="cs-label">DATE</span><div class="sig-date">24 / 05 / 2025</div></div>
+          </div>
+        </div>
+
+        <!-- CENTER: hero image -->
+        <div class="contract-center">
+          <img src="signing-contrat.png" alt="Nardos signing" class="contract-hero-img"/>
+          <div class="contract-img-overlay"></div>
+        </div>
+
+        <!-- RIGHT: form -->
+        <div class="contract-right">
+          <div class="contract-form-card">
+            <div class="cfc-icon"><i class="fas fa-envelope"></i></div>
+            <h3>GET IN TOUCH</h3>
+            <div class="cfc-divider"></div>
+            <form id="contactForm">
+              <div class="cfc-field">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Your Name" id="name"/>
+              </div>
+              <div class="cfc-field">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Your Email" id="email"/>
+              </div>
+              <div class="cfc-field">
+                <i class="fas fa-pen"></i>
+                <input type="text" placeholder="Project / Subject" id="subject"/>
+              </div>
+              <div class="cfc-field cfc-textarea">
+                <textarea placeholder="Your Message" id="message"></textarea>
+              </div>
+              <button type="button" class="btn-sign-contract" id="sendBtn">
+                SIGN CONTRACT <i class="fas fa-pen-nib"></i>
+              </button>
+              <button type="button" class="btn-start-negotiation" onclick="document.getElementById('message').focus()">
+                START NEGOTIATION <i class="fas fa-handshake"></i>
+              </button>
+              <p class="cfc-note">I'll get back to you as soon as possible.</p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- bottom bar -->
+      <div class="contract-bottom-bar">
+        <div class="cbb-item"><i class="fas fa-envelope"></i><div><span>EMAIL</span><strong>nardosbehailu23@gmail.com</strong></div></div>
+        <div class="cbb-item"><i class="fas fa-phone"></i><div><span>PHONE</span><strong>+25197659****</strong></div></div>
+        <div class="cbb-item"><i class="fas fa-map-marker-alt"></i><div><span>LOCATION</span><strong>Bahirdar, Ethiopia</strong></div></div>
+        <div class="cbb-item"><a href="#"><i class="fab fa-linkedin"></i><div><span>LINKEDIN</span><strong>/in/nardos-behailu</strong></div></a></div>
+        <div class="cbb-item"><a href="#"><i class="fab fa-github"></i><div><span>GITHUB</span><strong>/nardos-behailu</strong></div></a></div>
+        <div class="cbb-item"><a href="#"><i class="fas fa-globe"></i><div><span>PORTFOLIO</span><strong>nardos.dev</strong></div></a></div>
+      </div>
+
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Nardos<span>.</span></div>
+          <p class="footer-tagline">Creative Developer &amp; UX/UI Designer based in Ethiopia.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+          </div>
+        </div>
      
-    </section>
-
-    <hr/>
-
-    <!-- CONTACT (untouched) -->
-    <section id="contact" class="p5">
-      <div class="contact-header">
-        <h2>Get in touch</h2>
-        <p>Have a project in mind or need to collaborate? Feel free to reach out using this form.</p>
-      </div>
-
-      <div class="c-ia">
-        <div class="contact-form">
-          <h3>Fill this form</h3>
-          <form id="contactForm">
-            <input type="text" placeholder="your name" id="name" />
-            <input type="email" placeholder="youremail**.gmail" id="email" />
-            <input type="text" placeholder="subject" id="subject" />
-            <textarea placeholder="your message" id="message"></textarea>
-            <button type="button" class="send" id="sendBtn">send message</button>
-          </form>
+        <div class="footer-links">
+          <h5>Services</h5>
+          <span>UI/UX Design</span>
+          <span>Web Development</span>
+          <span>Mobile Apps</span>
+          <span>Branding</span>
         </div>
-
-        <div class="contact-info">
-          <h3> contact information</h3>
-          <div class="info1"><i class="fas fa-map-marker-alt"></i><div class="pno"><div>location</div><div>dessie city ,wollo, ethiopia</div></div></div>
-          <div class="info2"><i class="fas fa-envelope"></i><div class="pno"><div>E-mail</div><div>johnn*****@gmail.com</div></div></div>
-          <div class="info3"><i class="fas fa-phone"></i><div class="pno"><div>phone number</div><div>+25197659****</div></div></div>
         </div>
+      <div class="footer-bottom">
+        <span>© 2025 Nardos Behailu. All Rights Reserved.</span>
+        <span>Built with <span class="heart">♥</span> &amp; JavaScript</span>
       </div>
-    </section>
-
-    <footer class="footer">
-      <div>© 2025 Nardos Portfolio. All Rights Reserved.</div>
     </footer>
+
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=57"></script>
+  <!-- Mobile bottom nav (Telegram-style) -->
+  <div class="mobile-bottom-nav" id="mobileBottomNav">
+    <nav>
+      <a href="#home"     class="mbn-link active" id="mbn-home"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="#about"    class="mbn-link" id="mbn-about"><i class="fas fa-user"></i><span>About</span></a>
+      <a href="#projects" class="mbn-link" id="mbn-projects"><i class="fas fa-folder"></i><span>Projects</span></a>
+      <a href="#skills"   class="mbn-link" id="mbn-skills"><i class="fas fa-futbol"></i><span>Skills</span></a>
+      <a href="#contact"  class="mbn-link" id="mbn-contact"><i class="fas fa-envelope"></i><span>Contact</span></a>
+    </nav>
+  </div>
 </body>
 </html>
