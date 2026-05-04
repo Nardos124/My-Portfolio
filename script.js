@@ -245,3 +245,328 @@ document.addEventListener('mouseleave',()=>{
 window.addEventListener('scroll', onScroll, {passive:true});
 window.addEventListener('resize', onScroll);
 window.addEventListener('load', onScroll);
+
+
+/* ══════════════════════════════════════════════
+   MISSING HANDLERS — audit fix
+══════════════════════════════════════════════ */
+
+/* ── btn-work2: VIEW PROJECTS → scroll to #projects ── */
+document.getElementById('btn-work2')?.addEventListener('click', () => {
+  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ── Hamburger → open/close mobile drawer ── */
+const hamburgerBtn   = document.getElementById('hamburgerBtn');
+const mobileDrawer   = document.getElementById('mobileDrawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+function openDrawer() {
+  if (mobileDrawer)   mobileDrawer.classList.add('open');
+  if (drawerBackdrop) drawerBackdrop.classList.add('open');
+  if (hamburgerBtn)   hamburgerBtn.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  if (mobileDrawer)   mobileDrawer.classList.remove('open');
+  if (drawerBackdrop) drawerBackdrop.classList.remove('open');
+  if (hamburgerBtn)   hamburgerBtn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburgerBtn?.addEventListener('click', () => {
+  mobileDrawer?.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+drawerBackdrop?.addEventListener('click', closeDrawer);
+
+/* ── Drawer links: smooth scroll + close drawer ── */
+document.querySelectorAll('.drawer-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      closeDrawer();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── More Info toggle → expand contract-expandable ── */
+const moreInfoBtn        = document.getElementById('moreInfoBtn');
+const contractExpandable = document.getElementById('contractExpandable');
+const moreInfoArrow      = document.getElementById('moreInfoArrow');
+
+moreInfoBtn?.addEventListener('click', () => {
+  const isOpen = contractExpandable?.classList.toggle('open');
+  if (moreInfoBtn) moreInfoBtn.setAttribute('aria-expanded', String(!!isOpen));
+  if (moreInfoArrow) {
+    moreInfoArrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+  }
+});
+
+/* ── Player card (FIFA card) → open stats modal ── */
+const aboutCardWrap = document.getElementById('aboutCardWrap');
+const statsOverlay  = document.getElementById('statsOverlay');
+const statsClose    = document.getElementById('statsClose');
+
+function openStatsModal() {
+  if (!statsOverlay) return;
+  statsOverlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+  /* animate stat counters */
+  document.querySelectorAll('.av[data-val]').forEach(el => {
+    const target = parseInt(el.dataset.val, 10);
+    let cur = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const timer = setInterval(() => {
+      cur += step;
+      if (cur >= target) { cur = target; clearInterval(timer); }
+      el.textContent = cur;
+    }, 20);
+  });
+  drawRadarChart();
+}
+
+function closeStatsModal() {
+  if (!statsOverlay) return;
+  statsOverlay.hidden = true;
+  document.body.style.overflow = '';
+}
+
+aboutCardWrap?.addEventListener('click', openStatsModal);
+statsClose?.addEventListener('click', closeStatsModal);
+statsOverlay?.addEventListener('click', e => {
+  if (e.target === statsOverlay) closeStatsModal();
+});
+
+/* ── Radar chart for stats modal ── */
+function drawRadarChart() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const labels    = ['PACE', 'VISION', 'DELIVERY', 'CREATIVITY', 'COMMUNICATION', 'TECHNIQUE'];
+  const values    = [90, 92, 88, 85, 85, 95];
+  const max       = 100;
+  const cx        = canvas.width  / 2;
+  const cy        = canvas.height / 2;
+  const radius    = Math.min(cx, cy) - 30;
+  const sides     = labels.length;
+  const angleStep = (Math.PI * 2) / sides;
+  const startAngle = -Math.PI / 2;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  /* grid rings */
+  [0.25, 0.5, 0.75, 1].forEach(frac => {
+    ctx.beginPath();
+    for (let i = 0; i < sides; i++) {
+      const a = startAngle + i * angleStep;
+      const x = cx + Math.cos(a) * radius * frac;
+      const y = cy + Math.sin(a) * radius * frac;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(200,160,0,0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  /* spokes */
+  for (let i = 0; i < sides; i++) {
+    const a = startAngle + i * angleStep;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius);
+    ctx.strokeStyle = 'rgba(200,160,0,0.25)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  /* data polygon */
+  ctx.beginPath();
+  values.forEach((v, i) => {
+    const a = startAngle + i * angleStep;
+    const r = (v / max) * radius;
+    const x = cx + Math.cos(a) * r;
+    const y = cy + Math.sin(a) * r;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fillStyle   = 'rgba(200,160,0,0.25)';
+  ctx.strokeStyle = '#c8a000';
+  ctx.lineWidth   = 2;
+  ctx.fill();
+  ctx.stroke();
+
+  /* labels */
+  ctx.fillStyle    = '#fff';
+  ctx.font         = 'bold 10px sans-serif';
+  ctx.textAlign    = 'center';
+  ctx.textBaseline = 'middle';
+  labels.forEach((lbl, i) => {
+    const a = startAngle + i * angleStep;
+    const x = cx + Math.cos(a) * (radius + 18);
+    const y = cy + Math.sin(a) * (radius + 18);
+    ctx.fillText(lbl, x, y);
+  });
+}
+
+/* ── Enter Skills Arena ── */
+const btnEnterArena   = document.getElementById('btnEnterArena');
+const skillsArenaWrap = document.getElementById('skillsArenaWrap');
+const skillsLanding   = document.getElementById('skillsLanding');
+
+btnEnterArena?.addEventListener('click', () => {
+  if (skillsArenaWrap) {
+    skillsArenaWrap.style.display = '';
+    skillsArenaWrap.classList.add('visible');
+    skillsArenaWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  if (skillsLanding) skillsLanding.style.display = 'none';
+});
+
+/* ── Arena filter buttons ── */
+document.querySelectorAll('.arena-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.arena-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.skill-ball').forEach(ball => {
+      const cat = (ball.dataset.cat || '').trim();
+      ball.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+    });
+    document.querySelectorAll('.arena-group').forEach(group => {
+      const title = (group.querySelector('.arena-group-title')?.textContent || '').trim();
+      group.style.display = (filter === 'all' || title === filter) ? '' : 'none';
+    });
+  });
+});
+
+/* ── Project Carousel arrows ── */
+const jerseyCarousel = document.getElementById('jerseyCarousel');
+const carouselPrev   = document.getElementById('carouselPrev');
+const carouselNext   = document.getElementById('carouselNext');
+
+function getCarouselScrollAmount() {
+  const card = jerseyCarousel?.querySelector('.jersey-card');
+  return card ? card.offsetWidth + 16 : 280;
+}
+
+carouselPrev?.addEventListener('click', () => {
+  jerseyCarousel?.scrollBy({ left: -getCarouselScrollAmount(), behavior: 'smooth' });
+});
+carouselNext?.addEventListener('click', () => {
+  jerseyCarousel?.scrollBy({ left: getCarouselScrollAmount(), behavior: 'smooth' });
+});
+
+/* ── Jersey view buttons → open project detail panel ── */
+const projDetailPanel = document.getElementById('projDetailPanel');
+
+function openProjectDetail(card) {
+  const data = card.querySelector('.proj-detail-data');
+  if (!data || !projDetailPanel) return;
+
+  const name     = data.dataset.name      || '';
+  const desc     = data.dataset.desc      || '';
+  const tags     = (data.dataset.tags     || '').split(',').filter(Boolean);
+  const features = (data.dataset.features || '').split('|').filter(Boolean);
+  const demo     = data.dataset.demo      || '#';
+  const source   = data.dataset.source    || '#';
+  const img      = data.dataset.img       || '';
+
+  const el = id => document.getElementById(id);
+
+  if (el('detailName'))   el('detailName').textContent  = name;
+  if (el('detailDesc'))   el('detailDesc').textContent  = desc;
+  if (el('detailDemo'))   el('detailDemo').href          = demo;
+  if (el('detailSource')) el('detailSource').href        = source;
+
+  const featList = el('detailFeatures');
+  if (featList) featList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+
+  const tagsEl = el('detailTags');
+  if (tagsEl) tagsEl.innerHTML = tags.map(t => `<span>${t}</span>`).join('');
+
+  const detailImg         = el('detailImg');
+  const detailPlaceholder = el('detailPlaceholder');
+  if (img && detailImg) {
+    detailImg.src           = img;
+    detailImg.style.display = '';
+    if (detailPlaceholder) detailPlaceholder.style.display = 'none';
+  } else {
+    if (detailImg)          detailImg.style.display = 'none';
+    if (detailPlaceholder)  detailPlaceholder.style.display = '';
+  }
+
+  projDetailPanel.hidden = false;
+  projDetailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.querySelectorAll('.jersey-view-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const card = btn.closest('.jersey-card');
+    if (card) openProjectDetail(card);
+  });
+});
+
+/* ── Hero nav links: smooth scroll ── */
+document.querySelectorAll('.hero-nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── Secondary nav links: smooth scroll ── */
+document.querySelectorAll('.snav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── Mobile bottom nav links: smooth scroll ── */
+document.querySelectorAll('.mbn-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── Active nav state via IntersectionObserver
+   Covers .hero-nav-link, .snav-link, .mbn-link ── */
+(function initActiveNav() {
+  const allNavLinks = [
+    ...document.querySelectorAll('.hero-nav-link'),
+    ...document.querySelectorAll('.snav-link'),
+    ...document.querySelectorAll('.mbn-link'),
+  ];
+
+  function setActive(sectionId) {
+    allNavLinks.forEach(a => {
+      if (a.getAttribute('href') === '#' + sectionId) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  document.querySelectorAll('section[id]').forEach(sec => {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) setActive(sec.id);
+    }, { threshold: 0.35 }).observe(sec);
+  });
+})();
