@@ -3195,3 +3195,95 @@ a.jersey-gh-btn {
 }
 body.light .carousel-arrow { border-color: rgba(184,134,11,.3); background: rgba(184,134,11,.08); color: #b8860b; }
 body.light .carousel-arrow:hover:not(:disabled) { background: #b8860b; color: #fff; }
+
+/* ══ HIDE SECONDARY NAV ON DESKTOP ══ */
+@media (min-width: 701px) {
+  .secondary-nav { display: none !important; }
+}
+
+/* ══ LIGHT MODE — stats modal text darker ══ */
+body.light .stats-modal .sa span:last-child,
+body.light .stats-modal .av,
+body.light .stats-modal .stats-name,
+body.light .stats-modal .stats-pos,
+body.light .stats-modal .stats-sw li,
+body.light .stats-modal .stats-strengths h5,
+body.light .stats-modal .stats-weaknesses h5 {
+  color: #1a1a1a !important;
+}
+body.light .stats-modal .av.high { color: #1a6b1a !important; }
+body.light .stats-modal .av.mid  { color: #7a5500 !important; }
+body.light .stats-modal .av.low  { color: #8b0000 !important; }
+body.light .stats-modal .stats-strengths h5 { color: #1a6b1a !important; }
+body.light .stats-modal .stats-weaknesses h5 { color: #8b0000 !important; }
+body.light .stats-modal .stats-sw li { color: rgba(26,26,26,.75) !important; }
+
+/* ══ PROJECT CAROUSEL — touch/mouse scrollable ══ */
+.jersey-carousel {
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  cursor: grab !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(200,160,0,.3) transparent !important;
+}
+.jersey-carousel:active { cursor: grabbing !important; }
+.jersey-carousel::-webkit-scrollbar { height: 4px; }
+.jersey-carousel::-webkit-scrollbar-track { background: transparent; }
+.jersey-carousel::-webkit-scrollbar-thumb { background: rgba(200,160,0,.3); border-radius: 2px; }
+.jersey-card { scroll-snap-align: start !important; }
+
+/* ══ SKILLS ARENA — hide button ══ */
+.skills-arena-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.btn-hide-arena {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(200,160,0,.1);
+  border: 1px solid rgba(200,160,0,.25);
+  color: var(--accent);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: .75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.btn-hide-arena:hover { background: rgba(200,160,0,.2); }
+body.light .btn-hide-arena { border-color: rgba(184,134,11,.3); color: #b8860b; background: rgba(184,134,11,.08); }
+
+/* ══ ABOUT — slide-in animations ══ */
+.about-card-col {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity .8s cubic-bezier(.25,.46,.45,.94),
+              transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.about-info-col {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity .8s cubic-bezier(.25,.46,.45,.94) .15s,
+              transform .8s cubic-bezier(.25,.46,.45,.94) .15s;
+}
+.about-card-col.slide-in,
+.about-info-col.slide-in {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* ══ CONTACT — parallax sticky effect ══ */
+.contact-section {
+  position: relative;
+  z-index: 5;
+}
+/* Skills section slides under contact when scrolling */
+.skills-section {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}

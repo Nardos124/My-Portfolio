@@ -570,3 +570,80 @@ document.querySelectorAll('.mbn-link').forEach(link => {
     }, { threshold: 0.35 }).observe(sec);
   });
 })();
+
+/* ══ HIDE ARENA BUTTON ══ */
+(function(){
+  const hideBtn     = document.getElementById('btnHideArena');
+  const arenaWrap   = document.getElementById('skillsArenaWrap');
+  const landing     = document.getElementById('skillsLanding');
+  const enterBtn    = document.getElementById('btnEnterArena');
+  if(!hideBtn) return;
+  hideBtn.addEventListener('click',()=>{
+    arenaWrap.classList.remove('visible');
+    arenaWrap.style.display = 'none';
+    if(landing){ landing.style.display = ''; }
+    if(enterBtn){
+      enterBtn.innerHTML = '<i class="fas fa-futbol"></i> Enter Skills Arena';
+      enterBtn.style.cssText = '';
+    }
+    landing?.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+
+/* ══ PROJECT CAROUSEL — mouse drag to scroll ══ */
+(function(){
+  const carousel = document.getElementById('jerseyCarousel');
+  if(!carousel) return;
+  let isDown = false, startX = 0, scrollLeft = 0;
+  carousel.addEventListener('mousedown', e=>{
+    isDown = true;
+    carousel.style.cursor = 'grabbing';
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+  });
+  carousel.addEventListener('mouseleave', ()=>{ isDown=false; carousel.style.cursor='grab'; });
+  carousel.addEventListener('mouseup',    ()=>{ isDown=false; carousel.style.cursor='grab'; });
+  carousel.addEventListener('mousemove',  e=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const x    = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+})();
+
+/* ══ ABOUT — slide-in on scroll ══ */
+(function(){
+  const cardCol = document.querySelector('.about-card-col');
+  const infoCol = document.querySelector('.about-info-col');
+  if(!cardCol && !infoCol) return;
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('slide-in');
+    });
+  },{threshold:0.15});
+  if(cardCol) obs.observe(cardCol);
+  if(infoCol) obs.observe(infoCol);
+})();
+
+/* ══ CONTACT PARALLAX — skills slides under contact ══ */
+(function(){
+  const skillsSec   = document.getElementById('skills');
+  const contactSec  = document.getElementById('contact');
+  if(!skillsSec || !contactSec) return;
+  function onScroll(){
+    const sy         = window.scrollY;
+    const skillsTop  = skillsSec.offsetTop;
+    const skillsH    = skillsSec.offsetHeight;
+    const contactTop = contactSec.offsetTop;
+    /* parallax: contact slides over skills */
+    const progress = Math.max(0, Math.min(1,
+      (sy - (contactTop - window.innerHeight)) / window.innerHeight
+    ));
+    const translateY = (1 - progress) * 40;
+    contactSec.style.transform      = `translateY(${translateY}px)`;
+    contactSec.style.transformOrigin = 'top center';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
