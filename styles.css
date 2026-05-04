@@ -902,13 +902,9 @@ body.light .proj-plan-box { background: rgba(184,134,11,.06); border-color: rgba
 .jersey-carousel {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 20px 4px 30px;
+  overflow: hidden;
   flex: 1;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  padding: 20px 4px 30px;
 }
 .jersey-carousel::-webkit-scrollbar { display:none; }
 
@@ -3161,3 +3157,41 @@ a.jersey-gh-btn {
 /* ══ CTA LINKS — pointer cursor ══ */
 .cbb-item { cursor: pointer; text-decoration: none; color: inherit; }
 .cbb-item:hover { text-decoration: none; }
+
+/* ══ CAROUSEL ARROWS — always functional ══ */
+.locker-room {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--border-gold);
+  background: rgba(200,160,0,.1);
+  color: var(--accent);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .25s, color .25s, transform .2s, box-shadow .25s;
+  z-index: 2;
+}
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--accent);
+  color: #111;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(200,160,0,.3);
+}
+.carousel-arrow:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+  transform: none;
+}
+body.light .carousel-arrow { border-color: rgba(184,134,11,.3); background: rgba(184,134,11,.08); color: #b8860b; }
+body.light .carousel-arrow:hover:not(:disabled) { background: #b8860b; color: #fff; }

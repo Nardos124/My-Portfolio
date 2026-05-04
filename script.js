@@ -265,8 +265,8 @@ document.querySelectorAll('a[href="#home"],.drawer-link[href="#home"]').forEach(
     if(!d||!panel) return;
     document.getElementById('detailName').textContent=d.dataset.name;
     document.getElementById('detailDesc').textContent=d.dataset.desc;
-    document.getElementById('detailDemo').href=d.dataset.demo;
-    document.getElementById('detailSource').href=d.dataset.source;
+    const demoEl=document.getElementById('detailDemo'); demoEl.href=d.dataset.demo; demoEl.target=d.dataset.demo!=='#'?'_blank':''; demoEl.rel='noopener';
+    const srcEl=document.getElementById('detailSource'); srcEl.href=d.dataset.source; srcEl.target='_blank'; srcEl.rel='noopener';
     const img=document.getElementById('detailImg'), ph=document.getElementById('detailPlaceholder');
     if(d.dataset.img){ img.src=d.dataset.img; img.style.display='block'; ph.style.display='none'; }
     else { img.style.display='none'; ph.style.display='flex'; }
@@ -282,6 +282,7 @@ document.querySelectorAll('a[href="#home"],.drawer-link[href="#home"]').forEach(
   });
 
   window.addEventListener('resize',render);
+  setTimeout(render, 100);
   render();
 })();
 
