@@ -2085,7 +2085,14 @@ body.light .cfc-note { color: rgba(26,26,26,.4); }
   margin: 0 -5%;
   padding: 0 5%;
 }
-body.light .contract-bottom-bar { border-top-color: rgba(184,134,11,.15); }
+body.light .contract-bottom-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  margin: 0 -5%;
+  padding: 0 5%;
+}
 .cbb-item {
   flex: 1;
   min-width: 160px;
@@ -2330,9 +2337,24 @@ body.light .toast { background: rgba(250,246,238,.97); color: #1a1a1a; border-co
   .formation-pitch { height: 400px; }
 
   /* contact */
-  .contract-page { grid-template-columns: 1fr 1fr; }
+  .contract-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: start;
+  padding-bottom: 60px;
+}
   .contract-center { display:none; }
-  .contract-bottom-bar { flex-wrap: wrap; }
+  .contract-bottom-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  margin: 0 -5%;
+  padding: 0 5%;
+}
   .cbb-item { min-width: 140px; flex: 1 1 140px; }
 
   /* footer */
@@ -2403,9 +2425,24 @@ body.light .toast { background: rgba(250,246,238,.97); color: #1a1a1a; border-co
 
   /* contact */
   .contact-section { padding: 70px 4% 0; }
-  .contract-page { grid-template-columns: 1fr; gap: 20px; }
+  .contract-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: start;
+  padding-bottom: 60px;
+}
   .contract-center { display: block; aspect-ratio: 16/9; }
-  .contract-bottom-bar { flex-direction: column; margin: 0 -4%; padding: 0 4%; }
+  .contract-bottom-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  margin: 0 -5%;
+  padding: 0 5%;
+}
   .cbb-item { border-right: none; border-bottom: 1px solid var(--border); min-width: 100%; }
   .cbb-item:last-child { border-bottom: none; }
   body.light .cbb-item { border-bottom-color: rgba(184,134,11,.12); }
@@ -2638,4 +2675,78 @@ body.light :focus-visible { outline-color: #b8860b; }
     transition-duration: .01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* ══ CONTACT PAGE — MOBILE FIXES ══ */
+
+/* contract-expandable: ensure it's not clipped */
+.contract-expandable {
+  overflow: visible !important;
+}
+.contract-left {
+  overflow: visible !important;
+}
+
+/* Mobile: stack contract-page to single column */
+@media (max-width: 900px) {
+  .contract-page {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .contract-center { display: none !important; }
+  .contract-left { order: 1; }
+  .contract-right { order: 2; }
+  .contract-bottom-bar {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .cbb-item {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 14px 16px !important;
+  }
+  .cbb-item:last-child { border-bottom: none !important; }
+}
+
+@media (max-width: 700px) {
+  .contact-section { padding: 80px 4% 50px !important; }
+  .contract-title { font-size: clamp(1.8rem,8vw,2.8rem) !important; }
+  .contract-tag { font-size: .72rem !important; }
+  .contract-tagline { font-size: .88rem !important; }
+  .contract-intro { font-size: .82rem !important; }
+  .contract-divider { margin: 10px 0 !important; }
+  .more-info-btn { font-size: .78rem !important; padding: 9px 14px !important; }
+  .contract-expandable { gap: 12px !important; }
+  .co-item { padding: 10px 12px !important; gap: 10px !important; }
+  .co-icon { width: 32px !important; height: 32px !important; font-size: .8rem !important; }
+  .co-item div strong { font-size: .8rem !important; }
+  .co-item div span { font-size: .68rem !important; }
+  .contract-stats {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+  .contract-stats > div { flex: 1; min-width: 100px; }
+  .contract-signature-box {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 14px !important;
+  }
+  .sig-text { font-size: 1.2rem !important; }
+  .contract-form-card { padding: 20px 16px !important; }
+  .cfc-field { padding: 10px 12px !important; }
+  .btn-sign-contract, .btn-start-negotiation {
+    padding: 12px !important;
+    font-size: .78rem !important;
+  }
+  .cbb-item { padding: 12px 14px !important; }
+  .cbb-item strong { font-size: .78rem !important; }
+  .cbb-item span { font-size: .6rem !important; }
+}
+
+@media (max-width: 480px) {
+  .contract-title { font-size: clamp(1.5rem,9vw,2.2rem) !important; }
+  .contract-form-card { padding: 16px 12px !important; }
 }
