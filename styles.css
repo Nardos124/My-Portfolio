@@ -3276,14 +3276,40 @@ body.light .btn-hide-arena { border-color: rgba(184,134,11,.3); color: #b8860b; 
   transform: translateX(0) !important;
 }
 
-/* ══ CONTACT — parallax sticky effect ══ */
+
+
+/* ══ PARALLAX STACK — contact + footer slide over skills ══ */
+
+/* Skills: normal flow, no sticky */
+.skills-section {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Contact: slides over skills with rounded top + shadow */
 .contact-section {
   position: relative;
-  z-index: 5;
+  z-index: 10;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -20px 60px rgba(0,0,0,.5);
+  margin-top: 0;
+  /* start slightly below, JS will animate it */
 }
-/* Skills section slides under contact when scrolling */
-.skills-section {
-  position: sticky;
-  top: 0;
-  z-index: 4;
+body.light .contact-section {
+  box-shadow: 0 -20px 60px rgba(0,0,0,.12);
+}
+
+/* Footer: slides over contact */
+.site-footer {
+  position: relative !important;
+  z-index: 11 !important;
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Wrapper to enable stacking */
+.contact-footer-wrap {
+  position: relative;
+  z-index: 10;
 }

@@ -626,24 +626,51 @@ document.querySelectorAll('.mbn-link').forEach(link => {
   if(infoCol) obs.observe(infoCol);
 })();
 
-/* ══ CONTACT PARALLAX — skills slides under contact ══ */
+
+
+/* ══ CONTACT + FOOTER PARALLAX OVER SKILLS ══
+   Contact slides over skills only AFTER skills is fully scrolled past.
+   Footer slides over contact the same way.
+*/
 (function(){
-  const skillsSec   = document.getElementById('skills');
-  const contactSec  = document.getElementById('contact');
+  const skillsSec  = document.getElementById('skills');
+  const contactSec = document.getElementById('contact');
+  const footer     = document.querySelector('.site-footer');
   if(!skillsSec || !contactSec) return;
-  function onScroll(){
-    const sy         = window.scrollY;
-    const skillsTop  = skillsSec.offsetTop;
-    const skillsH    = skillsSec.offsetHeight;
-    const contactTop = contactSec.offsetTop;
-    /* parallax: contact slides over skills */
-    const progress = Math.max(0, Math.min(1,
-      (sy - (contactTop - window.innerHeight)) / window.innerHeight
-    ));
-    const translateY = (1 - progress) * 40;
-    contactSec.style.transform      = `translateY(${translateY}px)`;
+
+  function update(){
+    const sy  = window.scrollY;
+    const vh  = window.innerHeight;
+
+    /* ── Contact slides over skills ──
+       Starts when bottom of skills reaches bottom of viewport.
+       Ends when contact is fully in view. */
+    const skillsBottom = skillsSec.offsetTop + skillsSec.offsetHeight;
+    const contactH     = contactSec.offsetHeight;
+
+    /* progress 0→1: 0 = skills just finished, 1 = contact fully visible */
+    const cStart = skillsBottom - vh;          /* scroll Y when skills bottom hits viewport bottom */
+    const cEnd   = skillsBottom;               /* scroll Y when skills bottom hits viewport top */
+    const cProg  = Math.max(0, Math.min(1, (sy - cStart) / (cEnd - cStart)));
+
+    /* contact slides up from 60px below its natural position */
+    const cTY = (1 - cProg) * 60;
+    contactSec.style.transform      = `translateY(${cTY}px)`;
     contactSec.style.transformOrigin = 'top center';
+
+    /* ── Footer slides over contact ── */
+    if(footer){
+      const contactBottom = contactSec.offsetTop + contactSec.offsetHeight;
+      const fStart = contactBottom - vh;
+      const fEnd   = contactBottom;
+      const fProg  = Math.max(0, Math.min(1, (sy - fStart) / (fEnd - fStart)));
+      const fTY    = (1 - fProg) * 40;
+      footer.style.transform      = `translateY(${fTY}px)`;
+      footer.style.transformOrigin = 'top center';
+    }
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
 })();
