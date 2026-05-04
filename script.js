@@ -1,172 +1,65 @@
-/* ══ EmailJS ══ */
-(function(){ if(window.emailjs) emailjs.init("ouwThvw_yAzbu5L4Z"); })();
+/* ══ CONTACT FORM — Formspree ══
+   Replace FORMSPREE_ENDPOINT with your endpoint from formspree.io
+   e.g. https://formspree.io/f/xyzabc12
+   Free plan: 50 submissions/month, no backend needed
+══ */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyzabc12"; // ← replace this
+
 const sendBtn = document.getElementById('sendBtn');
 if(sendBtn){
-  sendBtn.addEventListener('click',()=>{
-    const n=document.getElementById('name').value.trim();
-    const e=document.getElementById('email').value.trim();
-    const s=document.getElementById('subject').value.trim();
-    const m=document.getElementById('message').value.trim();
+  sendBtn.addEventListener('click', async ()=>{
+    const n = document.getElementById('name').value.trim();
+    const e = document.getElementById('email').value.trim();
+    const s = document.getElementById('subject').value.trim();
+    const m = document.getElementById('message').value.trim();
+
     if(!n||!e||!s||!m){
-      sendBtn.innerHTML='<i class="fas fa-exclamation-circle"></i> Fill all fields';
-      setTimeout(()=>{ sendBtn.innerHTML='SIGN CONTRACT <i class="fas fa-pen-nib"></i>'; },2000);
+      sendBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Fill all fields';
+      setTimeout(()=>{ sendBtn.innerHTML = 'SIGN CONTRACT <i class="fas fa-pen-nib"></i>'; }, 2000);
       return;
     }
+
     const orig = sendBtn.innerHTML;
     sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     sendBtn.disabled = true;
 
-    emailjs.send("service_npx2skm","template_9e8ybuo",{
-      from_name: n, from_email: e, subject: s, message: m,
-      to_email: "johnneah124@gmail.com"
-    })
-    .then(()=>{
-      sendBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-      sendBtn.style.background = 'linear-gradient(135deg,#2ecc71,#27ae60)';
-      ['name','email','subject','message'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
-      setTimeout(()=>{ sendBtn.innerHTML=orig; sendBtn.style.background=''; sendBtn.disabled=false; },3000);
-    })
-    .catch((err)=>{
-      console.error('EmailJS error:',err);
-      sendBtn.innerHTML = '<i class="fas fa-times"></i> Failed — opening email app';
-      sendBtn.style.background = 'linear-gradient(135deg,#e74c3c,#c0392b)';
-      setTimeout(()=>{ sendBtn.innerHTML=orig; sendBtn.style.background=''; sendBtn.disabled=false; },3000);
-      window.location.href = 'mailto:johnneah124@gmail.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent('From: '+n+' ('+e+')\n\n'+m);
-    });
-  });
-},{threshold:0.35}).observe(sec);
-});
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: n, email: e, subject: s, message: m })
+      });
 
-/* ── Home nav: scroll to top ── */
-document.querySelectorAll('a[href="#home"],.drawer-link[href="#home"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-});
-
-/* ── Hamburger drawer ── */
-(function(){
-  const btn=document.getElementById('hamburgerBtn');
-  const drawer=document.getElementById('mobileDrawer');
-  const backdrop=document.getElementById('drawerBackdrop');
-  if(!btn||!drawer) return;
-  function openD(){ drawer.classList.add('open'); backdrop?.classList.add('open'); btn.classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeD(){ drawer.classList.remove('open'); backdrop?.classList.remove('open'); btn.classList.remove('open'); document.body.style.overflow=''; }
-  btn.addEventListener('click',()=>drawer.classList.contains('open')?closeD():openD());
-  backdrop?.addEventListener('click',closeD);
-  drawer.querySelectorAll('.drawer-link').forEach(a=>a.addEventListener('click',closeD));
-})();
-
-/* ── Mobile bottom nav ── */
-(function(){
-  const links=document.querySelectorAll('.mbn-link');
-  links.forEach(a=>{
-    a.addEventListener('click',e=>{
-      e.preventDefault();
-      const t=document.querySelector(a.getAttribute('href'));
-      if(t) t.scrollIntoView({behavior:'smooth'});
-    });
-  });
-})();
-
-/* ══ STATS MODAL — click kira22 image to open ══ */
-(function(){
-  const cardImg  = document.getElementById('playerCardImg');
-  const overlay  = document.getElementById('statsOverlay');
-  const closeBtn = document.getElementById('statsClose');
-  const canvas   = document.getElementById('radarChart');
-  if(!overlay) return;
-
-  const ATTRS = [
-    {label:'PACE',val:90},{label:'VISION',val:92},{label:'PASSING',val:88},
-    {label:'DEFENSE',val:75},{label:'STAMINA',val:85},{label:'TECHNIQUE',val:95},
-  ];
-
-  function drawRadar(){
-    if(!canvas) return;
-    const ctx=canvas.getContext('2d');
-    const w=canvas.width, h=canvas.height, cx=w/2, cy=h/2;
-    const r=Math.min(w,h)*0.36, n=ATTRS.length;
-    ctx.clearRect(0,0,w,h);
-    for(let ring=1;ring<=5;ring++){
-      ctx.beginPath();
-      for(let i=0;i<n;i++){
-        const a=(i/n)*Math.PI*2-Math.PI/2, rr=r*(ring/5);
-        i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
+      if(res.ok){
+        sendBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        sendBtn.style.background = 'linear-gradient(135deg,#2ecc71,#27ae60)';
+        ['name','email','subject','message'].forEach(id=>{
+          const el = document.getElementById(id);
+          if(el) el.value = '';
+        });
+        setTimeout(()=>{
+          sendBtn.innerHTML = orig;
+          sendBtn.style.background = '';
+          sendBtn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('Server error ' + res.status);
       }
-      ctx.closePath(); ctx.strokeStyle='rgba(200,160,0,.15)'; ctx.lineWidth=1; ctx.stroke();
+    } catch(err) {
+      console.error('Form error:', err);
+      sendBtn.innerHTML = '<i class="fas fa-times"></i> Failed — opening email';
+      sendBtn.style.background = 'linear-gradient(135deg,#e74c3c,#c0392b)';
+      setTimeout(()=>{
+        sendBtn.innerHTML = orig;
+        sendBtn.style.background = '';
+        sendBtn.disabled = false;
+      }, 3000);
+      // fallback: open email client
+      window.location.href = 'mailto:johnneah124@gmail.com'
+        + '?subject=' + encodeURIComponent(s)
+        + '&body='    + encodeURIComponent('From: ' + n + ' (' + e + ')\n\n' + m);
     }
-    for(let i=0;i<n;i++){
-      const a=(i/n)*Math.PI*2-Math.PI/2;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
-      ctx.strokeStyle='rgba(200,160,0,.12)'; ctx.lineWidth=1; ctx.stroke();
-    }
-    ctx.beginPath();
-    ATTRS.forEach((at,i)=>{
-      const a=(i/n)*Math.PI*2-Math.PI/2, rr=r*(at.val/100);
-      i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
-    });
-    ctx.closePath(); ctx.fillStyle='rgba(100,160,255,.35)'; ctx.fill();
-    ctx.strokeStyle='rgba(100,160,255,.85)'; ctx.lineWidth=2; ctx.stroke();
-    ATTRS.forEach((at,i)=>{
-      const a=(i/n)*Math.PI*2-Math.PI/2, rr=r*(at.val/100);
-      const x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr;
-      ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fillStyle='#c8a000'; ctx.fill();
-      ctx.font='bold 9px Segoe UI'; ctx.fillStyle='rgba(255,255,255,.6)'; ctx.textAlign='center';
-      ctx.fillText(at.label, cx+Math.cos(a)*r*1.22, cy+Math.sin(a)*r*1.22+4);
-    });
-  }
-
-  function openModal(){
-    overlay.removeAttribute('hidden');
-    overlay.hidden = false;
-    document.body.style.overflow = 'hidden';
-    drawRadar();
-    overlay.querySelectorAll('.av').forEach(el=>{
-      const target=parseInt(el.dataset.val||'0');
-      let cur=0; const step=Math.ceil(target/25);
-      const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=cur; if(cur>=target)clearInterval(t); },30);
-    });
-  }
-  function closeModal(){
-    overlay.hidden = true;
-    overlay.setAttribute('hidden','');
-    document.body.style.overflow = '';
-  }
-
-  /* click the image to open */
-  cardImg?.addEventListener('click', openModal);
-  /* X button closes */
-  closeBtn?.addEventListener('click', e=>{ e.stopPropagation(); closeModal(); });
-  /* click backdrop closes */
-  overlay?.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
-  /* Escape key closes */
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape'&&!overlay.hidden) closeModal(); });
-})();
-
-/* ══ ABOUT — read more / achievements ══ */
-(function(){
-  const moreBtn  = document.getElementById('aboutMoreBtn');
-  const moreText = document.getElementById('aboutQuoteMore');
-  if(moreBtn && moreText){
-    moreBtn.addEventListener('click',()=>{
-      const open = moreText.hidden;
-      moreText.hidden = !open;
-      moreBtn.innerHTML = open
-        ? 'Read Less <i class="fas fa-chevron-up"></i>'
-        : 'Read More <i class="fas fa-chevron-down"></i>';
-    });
-  }
-  const achBtn  = document.getElementById('achToggleBtn');
-  const achList = document.getElementById('achList');
-  if(achBtn && achList){
-    achBtn.addEventListener('click',()=>{
-      const open = achList.hidden;
-      achList.hidden = !open;
-      achBtn.setAttribute('aria-expanded', open);
-    });
-  }
+  });
 })();
 
 /* ══ CONTRACT — more info slide from left ══ */
