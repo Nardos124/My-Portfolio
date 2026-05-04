@@ -7,39 +7,34 @@ if(sendBtn){
     const e=document.getElementById('email').value.trim();
     const s=document.getElementById('subject').value.trim();
     const m=document.getElementById('message').value.trim();
-    if(!n||!e||!s||!m){ alert('Please fill all fields'); return; }
-    emailjs.send("service_npx2skm","template_9e8ybuo",{name:n,email:e,subject:s,message:m})
-      .then(()=>alert('Message sent!')).catch(()=>alert('Failed.'));
-  });
-}
-
-/* ── Core buttons ── */
-document.getElementById('downloadBtn')?.addEventListener('click',()=>window.open("MY_CV .docx","_blank"));
-document.getElementById('btn-work')?.addEventListener('click',()=>document.getElementById('projects')?.scrollIntoView({behavior:'smooth'}));
-document.getElementById('btn-work2')?.addEventListener('click',()=>document.getElementById('projects')?.scrollIntoView({behavior:'smooth'}));
-document.getElementById('btn-contact')?.addEventListener('click',()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}));
-
-/* ── Theme toggle ── */
-const themeBtn = document.getElementById('themeToggle');
-function applyTheme(light){
-  document.body.classList.toggle('light', light);
-  if(themeBtn) themeBtn.innerHTML = light ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-}
-applyTheme(localStorage.getItem('theme') === 'light');
-themeBtn?.addEventListener('click',()=>{
-  const l = !document.body.classList.contains('light');
-  localStorage.setItem('theme', l ? 'light' : 'dark');
-  applyTheme(l);
-});
-
-/* ── Active nav (hero-nav-link) ── */
-document.querySelectorAll('section[id]').forEach(sec=>{
-  new IntersectionObserver(entries=>{
-    if(entries[0].isIntersecting){
-      document.querySelectorAll('.hero-nav-link,.mbn-link').forEach(a=>a.classList.remove('active'));
-      document.querySelectorAll('[href="#'+sec.id+'"]').forEach(a=>a.classList.add('active'));
+    if(!n||!e||!s||!m){
+      sendBtn.innerHTML='<i class="fas fa-exclamation-circle"></i> Fill all fields';
+      setTimeout(()=>{ sendBtn.innerHTML='SIGN CONTRACT <i class="fas fa-pen-nib"></i>'; },2000);
+      return;
     }
-  },{threshold:0.35}).observe(sec);
+    const orig = sendBtn.innerHTML;
+    sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    sendBtn.disabled = true;
+
+    emailjs.send("service_npx2skm","template_9e8ybuo",{
+      from_name: n, from_email: e, subject: s, message: m,
+      to_email: "johnneah124@gmail.com"
+    })
+    .then(()=>{
+      sendBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+      sendBtn.style.background = 'linear-gradient(135deg,#2ecc71,#27ae60)';
+      ['name','email','subject','message'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+      setTimeout(()=>{ sendBtn.innerHTML=orig; sendBtn.style.background=''; sendBtn.disabled=false; },3000);
+    })
+    .catch((err)=>{
+      console.error('EmailJS error:',err);
+      sendBtn.innerHTML = '<i class="fas fa-times"></i> Failed — opening email app';
+      sendBtn.style.background = 'linear-gradient(135deg,#e74c3c,#c0392b)';
+      setTimeout(()=>{ sendBtn.innerHTML=orig; sendBtn.style.background=''; sendBtn.disabled=false; },3000);
+      window.location.href = 'mailto:johnneah124@gmail.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent('From: '+n+' ('+e+')\n\n'+m);
+    });
+  });
+},{threshold:0.35}).observe(sec);
 });
 
 /* ── Home nav: scroll to top ── */
