@@ -245,7 +245,3 @@ document.addEventListener('mouseleave',()=>{
 window.addEventListener('scroll', onScroll, {passive:true});
 window.addEventListener('resize', onScroll);
 window.addEventListener('load', onScroll);
-
-
-
-https://formspree.io/f/xlgzjagj
